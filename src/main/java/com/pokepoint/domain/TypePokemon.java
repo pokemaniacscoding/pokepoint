@@ -1,18 +1,29 @@
 package com.pokepoint.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class TypeName {
+@Entity
+@Table(name="type")
+public class TypePokemon implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String englishName;
     private String japaneseName;
     private String portugueseName;
     private String spanishName;
 
-    public TypeName() {
+    public TypePokemon() {
     }
 
-    public TypeName(Integer id, String englishName, String japaneseName, String portugueseName, String spanishName) {
+    public TypePokemon(Integer id, String englishName, String japaneseName, String portugueseName, String spanishName) {
         this.id = id;
         this.englishName = englishName;
         this.japaneseName = japaneseName;
@@ -64,7 +75,7 @@ public class TypeName {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TypeName typeName = (TypeName) o;
+        TypePokemon typeName = (TypePokemon) o;
         return id.equals(typeName.id) &&
                 englishName.equals(typeName.englishName) &&
                 japaneseName.equals(typeName.japaneseName) &&

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TesteNameType {
+public class TesteTypePokemon {
     private static final Integer ID = 1;
     private static final String ENGLISH_NAME = "Dragon ";
     private static final String JAPANESE_NAME = "ドラゴンタイプ";
@@ -13,7 +13,7 @@ public class TesteNameType {
 
     @Test
     public void criarObjeto(){
-        TypeName typeName = new TypeName(ID, ENGLISH_NAME, JAPANESE_NAME, PORTUGUESE_NAME, SPANISH_NAME);
+        TypePokemon typeName = new TypePokemon(ID, ENGLISH_NAME, JAPANESE_NAME, PORTUGUESE_NAME, SPANISH_NAME);
         assertEquals(typeName.getId(), ID);
         assertEquals(typeName.getEnglishName(), ENGLISH_NAME);
         assertEquals(typeName.getJapaneseName(), JAPANESE_NAME);
