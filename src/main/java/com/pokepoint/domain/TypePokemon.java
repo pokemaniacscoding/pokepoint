@@ -18,17 +18,15 @@ public class TypePokemon implements Serializable {
     private String englishName;
     private String japaneseName;
     private String portugueseName;
-    private String spanishName;
 
     public TypePokemon() {
     }
 
-    public TypePokemon(Integer id, String englishName, String japaneseName, String portugueseName, String spanishName) {
+    public TypePokemon(Integer id, String englishName, String japaneseName, String portugueseName) {
         this.id = id;
         this.englishName = englishName;
         this.japaneseName = japaneseName;
         this.portugueseName = portugueseName;
-        this.spanishName = spanishName;
     }
 
     public Integer getId() {
@@ -47,10 +45,6 @@ public class TypePokemon implements Serializable {
         return portugueseName;
     }
 
-    public String getSpanishName() {
-        return spanishName;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -67,10 +61,6 @@ public class TypePokemon implements Serializable {
         this.portugueseName = portugueseName;
     }
 
-    public void setSpanishName(String spanishName) {
-        this.spanishName = spanishName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,13 +69,12 @@ public class TypePokemon implements Serializable {
         return id.equals(typeName.id) &&
                 englishName.equals(typeName.englishName) &&
                 japaneseName.equals(typeName.japaneseName) &&
-                portugueseName.equals(typeName.portugueseName) &&
-                spanishName.equals(typeName.spanishName);
+                portugueseName.equals(typeName.portugueseName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, englishName, japaneseName, portugueseName, spanishName);
+        return Objects.hash(id, englishName, japaneseName, portugueseName);
     }
 
     @Override
@@ -95,7 +84,6 @@ public class TypePokemon implements Serializable {
         sb.append(", englishName='").append(englishName).append('\'');
         sb.append(", japaneseName='").append(japaneseName).append('\'');
         sb.append(", portugueseName='").append(portugueseName).append('\'');
-        sb.append(", spanishName='").append(spanishName).append('\'');
         sb.append('}');
         return sb.toString();
     }
