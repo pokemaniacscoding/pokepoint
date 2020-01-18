@@ -4,11 +4,9 @@ import com.pokepoint.domain.MovePokemon;
 import com.pokepoint.domain.dto.MovePokemonDTO;
 import com.pokepoint.service.MovePokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,5 +30,17 @@ public class MovePokemonResource {
         MovePokemon obj = this.service.find(id);
         MovePokemonDTO objDTO = new MovePokemonDTO(obj);
         return ResponseEntity.ok().body(objDTO);
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ResponseEntity<?> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "englishName") String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction
+    ) {
+        Page<MovePokemon> lista = this.service.findPage(page, linesPerPage, orderBy, direction);
+        Page<MovePokemonDTO> listaDTO = lista.map(obj -> new MovePokemonDTO(obj));
+        return ResponseEntity.ok().body(listaDTO);
     }
 }

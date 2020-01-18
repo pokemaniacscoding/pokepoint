@@ -25,17 +25,6 @@ public class MovePokemon {
     public MovePokemon() {
     }
 
-    public MovePokemon(Integer id, String englishName, String japaneseName, String portugueseName, Integer accuracy, Integer power, Integer ppMin, Integer ppMax) {
-        this.id = id;
-        this.englishName = englishName;
-        this.japaneseName = japaneseName;
-        this.portugueseName = portugueseName;
-        this.accuracy = accuracy;
-        this.power = power;
-        this.ppMin = ppMin;
-        this.ppMax = ppMax;
-    }
-
     public MovePokemon(Integer id, String englishName, String japaneseName, String portugueseName, Integer accuracy, Integer power, Integer ppMin, Integer ppMax, TypePokemon type) {
         this.id = id;
         this.englishName = englishName;
