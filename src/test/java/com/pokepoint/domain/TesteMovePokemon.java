@@ -17,8 +17,7 @@ public class TesteMovePokemon {
     @Test
     public void criarObjeto() {
         TypePokemon type = new TypePokemon(1, "Dragon", "ドラゴンタイプ", "Dragão");
-        MovePokemon obj = new MovePokemon(ID,ENGLISH_NAME, JAPANESE_NAME, PORTUGUESE_NAME, ACCURACY, POWER, PP_MIN, PP_MAX);
-        obj.setType(type);
+        MovePokemon obj = new MovePokemon(ID,ENGLISH_NAME, JAPANESE_NAME, PORTUGUESE_NAME, ACCURACY, POWER, PP_MIN, PP_MAX, type);
 
         assertEquals(obj.getId(), ID);
         assertEquals(obj.getEnglishName(), ENGLISH_NAME);
