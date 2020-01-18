@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="move")
+@Table(name = "move")
 public class MovePokemon {
 
     @Id
@@ -15,21 +15,38 @@ public class MovePokemon {
     private String portugueseName;
     private Integer accuracy;
     private Integer power;
-    private Integer pp;
+    private Integer ppMin;
+    private Integer ppMax;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private TypePokemon type;
 
     public MovePokemon() {
     }
 
-    public MovePokemon(Integer id, String englishName, String japaneseName, String portugueseName, Integer accuracy, Integer power, Integer pp) {
+    public MovePokemon(Integer id, String englishName, String japaneseName, String portugueseName, Integer accuracy, Integer power, Integer ppMin, Integer ppMax) {
         this.id = id;
         this.englishName = englishName;
         this.japaneseName = japaneseName;
         this.portugueseName = portugueseName;
         this.accuracy = accuracy;
         this.power = power;
-        this.pp = pp;
+        this.ppMin = ppMin;
+        this.ppMax = ppMax;
     }
 
+    public MovePokemon(Integer id, String englishName, String japaneseName, String portugueseName, Integer accuracy, Integer power, Integer ppMin, Integer ppMax, TypePokemon type) {
+        this.id = id;
+        this.englishName = englishName;
+        this.japaneseName = japaneseName;
+        this.portugueseName = portugueseName;
+        this.accuracy = accuracy;
+        this.power = power;
+        this.ppMin = ppMin;
+        this.ppMax = ppMax;
+        this.type = type;
+    }
 
     public Integer getId() {
         return this.id;
@@ -47,8 +64,16 @@ public class MovePokemon {
         return portugueseName;
     }
 
-    public Integer getPp() {
-        return pp;
+    public Integer getPpMin() {
+        return ppMin;
+    }
+
+    public Integer getPpMax() {
+        return ppMax;
+    }
+
+    public TypePokemon getType() {
+        return this.type;
     }
 
     public Integer getAccuracy() {
@@ -59,6 +84,42 @@ public class MovePokemon {
         return this.power;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setEnglishName(String englishName) {
+        this.englishName = englishName;
+    }
+
+    public void setJapaneseName(String japaneseName) {
+        this.japaneseName = japaneseName;
+    }
+
+    public void setPortugueseName(String portugueseName) {
+        this.portugueseName = portugueseName;
+    }
+
+    public void setAccuracy(Integer accuracy) {
+        this.accuracy = accuracy;
+    }
+
+    public void setPower(Integer power) {
+        this.power = power;
+    }
+
+    public void setPpMin(Integer ppMin) {
+        this.ppMin = ppMin;
+    }
+
+    public void setPpMax(Integer ppMax) {
+        this.ppMax = ppMax;
+    }
+
+    public void setType(TypePokemon type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,15 +128,12 @@ public class MovePokemon {
         return Objects.equals(id, that.id) &&
                 Objects.equals(englishName, that.englishName) &&
                 Objects.equals(japaneseName, that.japaneseName) &&
-                Objects.equals(portugueseName, that.portugueseName) &&
-                Objects.equals(accuracy, that.accuracy) &&
-                Objects.equals(power, that.power) &&
-                Objects.equals(pp, that.pp);
+                Objects.equals(portugueseName, that.portugueseName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, englishName, japaneseName, portugueseName, accuracy, power, pp);
+        return Objects.hash(id, englishName, japaneseName, portugueseName);
     }
 
     @Override
@@ -87,7 +145,9 @@ public class MovePokemon {
         sb.append(", portugueseName='").append(portugueseName).append('\'');
         sb.append(", accuracy=").append(accuracy);
         sb.append(", power=").append(power);
-        sb.append(", pp=").append(pp);
+        sb.append(", ppMin=").append(ppMin);
+        sb.append(", ppMax=").append(ppMax);
+        sb.append(", type=").append(type);
         sb.append('}');
         return sb.toString();
     }

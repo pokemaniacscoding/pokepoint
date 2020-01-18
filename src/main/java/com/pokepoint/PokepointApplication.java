@@ -1,6 +1,8 @@
 package com.pokepoint;
 
+import com.pokepoint.domain.MovePokemon;
 import com.pokepoint.domain.TypePokemon;
+import com.pokepoint.repository.MovePokemonRepository;
 import com.pokepoint.repository.TypePokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +16,9 @@ public class PokepointApplication implements CommandLineRunner {
 
     @Autowired
     TypePokemonRepository typePokemonRepository;
+
+    @Autowired
+    MovePokemonRepository movePokemonRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(PokepointApplication.class, args);
@@ -39,7 +44,17 @@ public class PokepointApplication implements CommandLineRunner {
         TypePokemon dragon = new TypePokemon(null, "Dragon", "ドラゴンタイプ", "Dragão");
         TypePokemon dark = new TypePokemon(null, "Dark", "あくタイプ", "Trevas");
         TypePokemon fairy = new TypePokemon(null, "Fairy", "フェアリータイプ", "Fada");
+
         typePokemonRepository.saveAll(Arrays.asList(normal, fighting, flying, poison, ground, rock, bug, ghost, steel, fire, water, grass, electric, psychic, ice, dragon, dark, fairy));
+
+        MovePokemon dragonClaw = new MovePokemon(null,"Dragon Claw", "ドラゴンクロー", "Garra de Dragão", 100, 80, 15, 25);
+        dragonClaw.setType(dragon);
+
+        MovePokemon flamethrower = new MovePokemon(null,"Flamethrower", "かえんほうしゃ", "Lança Chamas", 100, 90, 15, 25);
+        flamethrower.setType(fire);
+
+        movePokemonRepository.saveAll(Arrays.asList(dragonClaw, flamethrower));
+
     }
 
 }
