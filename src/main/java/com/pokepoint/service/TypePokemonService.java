@@ -1,6 +1,7 @@
 package com.pokepoint.service;
 
 import com.pokepoint.domain.TypePokemon;
+import com.pokepoint.exception.ObjectNotFoundException;
 import com.pokepoint.repository.TypePokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ public class TypePokemonService {
 
     public TypePokemon find(Integer id) {
         Optional<TypePokemon> obj = repo.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Tipo de Pokemon não encontrada"));
     }
 
     public List<TypePokemon> findAll(){
