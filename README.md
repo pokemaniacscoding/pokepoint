@@ -94,7 +94,7 @@ Retorna o movimento do ID passado na requisição:
 }
 ```
 
-#### type
+#### /type
 
 Retorna todos os tipos de Pokemons:
 ```
@@ -114,7 +114,7 @@ Retorna todos os tipos de Pokemons:
 ]
 ```
 
-#### type/{id}
+#### /type/{id}
 Retorna o tipo de acordo com o ID passado na requisição:
 ```
 {
