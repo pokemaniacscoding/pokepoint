@@ -2,10 +2,12 @@ package com.pokepoint.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="type")
+@Table(name = "type")
 public class TypePokemon implements Serializable {
     /**
      *

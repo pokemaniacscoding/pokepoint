@@ -31,4 +31,9 @@ public class TypePokemonService {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
     }
+
+    public TypePokemon insert(TypePokemon type){
+        type.setId(null);
+        return repo.save(type);
+    }
 }

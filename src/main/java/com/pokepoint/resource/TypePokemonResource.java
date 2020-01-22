@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,5 +38,12 @@ public class TypePokemonResource {
             @RequestParam(value = "direction", defaultValue = "ASC") String direction
     ) {
         return this.service.findPage(page, linesPerPage, orderBy, direction);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Object> insert(@Valid @RequestBody TypePokemon type){
+        TypePokemon obj = service.insert(type);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }

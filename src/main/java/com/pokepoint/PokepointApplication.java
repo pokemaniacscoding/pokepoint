@@ -43,8 +43,7 @@ public class PokepointApplication implements CommandLineRunner {
         TypePokemon ice = new TypePokemon(null, "Ice", "こおりタイプ", "Gelo");
         TypePokemon dragon = new TypePokemon(null, "Dragon", "ドラゴンタイプ", "Dragão");
         TypePokemon dark = new TypePokemon(null, "Dark", "あくタイプ", "Trevas");
-        TypePokemon fairy = new TypePokemon(null, "Fairy", "フェアリータイプ", "Fada");
-        typePokemonRepository.saveAll(Arrays.asList(normal, fighting, flying, poison, ground, rock, bug, ghost, steel, fire, water, grass, electric, psychic, ice, dragon, dark, fairy));
+//        TypePokemon fairy = new TypePokemon(null, "Fairy", "フェアリータイプ", "Fada");
 
         MovePokemon dragonClaw = new MovePokemon(null, "Dragon Claw", "ドラゴンクロー", "Garra de Dragão", 100, 80, 15, 25, dragon);
         MovePokemon flamethrower = new MovePokemon(null, "Flamethrower", "かえんほうしゃ", "Lança Chamas", 100, 90, 15, 25, fire);
@@ -57,6 +56,8 @@ public class PokepointApplication implements CommandLineRunner {
         MovePokemon aerialAce = new MovePokemon(null, "Aerial Ace", "つばめがえし", "", null, 60, 20, 32, flying);
         MovePokemon brickBreak = new MovePokemon(null, "Brick Break", "かわらわり", "", 100, 75, 15, 24, fighting);
         MovePokemon gigaImpact = new MovePokemon(null, "Giga Impact", "ギガインパクト", "", 90, 150, 5, 8, normal);
+
+        typePokemonRepository.saveAll(Arrays.asList(normal, fighting, flying, poison, ground, rock, bug, ghost, steel, fire, water, grass, electric, psychic, ice, dragon, dark));
         movePokemonRepository.saveAll(Arrays.asList(dragonClaw, flamethrower, stoneEdge, megahorn, shadowClaw, ironTail, earthquake, toxic, aerialAce, brickBreak, gigaImpact));
     }
 
