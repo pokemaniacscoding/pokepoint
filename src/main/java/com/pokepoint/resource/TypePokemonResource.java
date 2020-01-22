@@ -3,14 +3,11 @@ package com.pokepoint.resource;
 import com.pokepoint.domain.TypePokemon;
 import com.pokepoint.service.TypePokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/type")
@@ -28,5 +25,15 @@ public class TypePokemonResource {
     public ResponseEntity<?> find(@PathVariable Integer id) {
         TypePokemon typePokemon = this.service.find(id);
         return ResponseEntity.ok().body(typePokemon);
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public Page<TypePokemon> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "englishName") String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction
+    ) {
+        return this.service.findPage(page, linesPerPage, orderBy, direction);
     }
 }

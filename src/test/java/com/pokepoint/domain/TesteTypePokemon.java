@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TesteTypePokemon {
     private static final Integer ID = 1;
-    private static final String ENGLISH_NAME = "Dragon ";
+    private static final String ENGLISH_NAME = "Dragon";
     private static final String JAPANESE_NAME = "ドラゴンタイプ";
     private static final String PORTUGUESE_NAME = "Dragão";
 

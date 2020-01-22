@@ -1,6 +1,8 @@
 package com.pokepoint;
 
+import com.pokepoint.domain.MovePokemon;
 import com.pokepoint.domain.TypePokemon;
+import com.pokepoint.repository.MovePokemonRepository;
 import com.pokepoint.repository.TypePokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +16,9 @@ public class PokepointApplication implements CommandLineRunner {
 
     @Autowired
     TypePokemonRepository typePokemonRepository;
+
+    @Autowired
+    MovePokemonRepository movePokemonRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(PokepointApplication.class, args);
@@ -40,6 +45,19 @@ public class PokepointApplication implements CommandLineRunner {
         TypePokemon dark = new TypePokemon(null, "Dark", "あくタイプ", "Trevas");
         TypePokemon fairy = new TypePokemon(null, "Fairy", "フェアリータイプ", "Fada");
         typePokemonRepository.saveAll(Arrays.asList(normal, fighting, flying, poison, ground, rock, bug, ghost, steel, fire, water, grass, electric, psychic, ice, dragon, dark, fairy));
+
+        MovePokemon dragonClaw = new MovePokemon(null, "Dragon Claw", "ドラゴンクロー", "Garra de Dragão", 100, 80, 15, 25, dragon);
+        MovePokemon flamethrower = new MovePokemon(null, "Flamethrower", "かえんほうしゃ", "Lança Chamas", 100, 90, 15, 25, fire);
+        MovePokemon stoneEdge = new MovePokemon(null, "Stone Edge", "ストーンエッジ", "", 100, 80, 5, 8, ground);
+        MovePokemon megahorn = new MovePokemon(null, "Megahorn", "メガホーン", "", 85, 120, 10, 16,bug);
+        MovePokemon shadowClaw = new MovePokemon(null, "Shadow Claw", "シャドークロー", "", 100, 70, 15, 24, ghost);
+        MovePokemon ironTail = new MovePokemon(null, "Iron Tail", "アイアンテール", "", 75, 100, 15, 24, steel);
+        MovePokemon earthquake = new MovePokemon(null, "Earthquake", "じしん", "", 100, 100, 10, 16, rock);
+        MovePokemon toxic = new MovePokemon(null, "Toxic", "どくどく", "", 90, null, 10, 16, poison);
+        MovePokemon aerialAce = new MovePokemon(null, "Aerial Ace", "つばめがえし", "", null, 60, 20, 32, flying);
+        MovePokemon brickBreak = new MovePokemon(null, "Brick Break", "かわらわり", "", 100, 75, 15, 24, fighting);
+        MovePokemon gigaImpact = new MovePokemon(null, "Giga Impact", "ギガインパクト", "", 90, 150, 5, 8, normal);
+        movePokemonRepository.saveAll(Arrays.asList(dragonClaw, flamethrower, stoneEdge, megahorn, shadowClaw, ironTail, earthquake, toxic, aerialAce, brickBreak, gigaImpact));
     }
 
 }
