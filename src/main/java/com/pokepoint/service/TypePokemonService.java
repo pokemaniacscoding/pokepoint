@@ -41,4 +41,8 @@ public class TypePokemonService {
         type.setId(null);
         return repo.save(type);
     }
+
+    public void delete(Integer id) {
+        repo.deleteById(id);
+    }
 }

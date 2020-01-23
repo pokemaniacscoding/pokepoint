@@ -56,4 +56,10 @@ public class TypePokemonResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> delete(@PathVariable Integer id){
+        this.service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
