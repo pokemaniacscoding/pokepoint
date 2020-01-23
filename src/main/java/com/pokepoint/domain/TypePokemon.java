@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "type")
 public class TypePokemon implements Serializable {
     /**
      *
