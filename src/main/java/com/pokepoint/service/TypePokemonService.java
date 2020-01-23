@@ -23,6 +23,11 @@ public class TypePokemonService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Tipo de Pokemon não encontrada"));
     }
 
+    public TypePokemon find(String name){
+        Optional<TypePokemon> obj = repo.findByEnglishName(name);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Tipo de Pokemon não encontrada"));
+    }
+
     public List<TypePokemon> findAll(){
         return repo.findAll();
     }
