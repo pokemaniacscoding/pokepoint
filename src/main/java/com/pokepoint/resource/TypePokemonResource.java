@@ -28,16 +28,10 @@ public class TypePokemonResource {
         return listaDTO;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
-        TypePokemon typePokemon = this.service.find(id);
+    @RequestMapping(value = "/{param}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable String param) {
+        TypePokemon typePokemon = this.service.find(param);
         return ResponseEntity.ok().body(typePokemon);
-    }
-
-    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable String name){
-        TypePokemon obj = this.service.find(name);
-        return ResponseEntity.ok().body(obj);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)

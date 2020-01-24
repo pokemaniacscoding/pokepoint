@@ -18,13 +18,13 @@ public class TypePokemonService {
     @Autowired
     private TypePokemonRepository repo;
 
-    public TypePokemon find(Integer id) {
-        Optional<TypePokemon> obj = repo.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Tipo de Pokemon não encontrada"));
-    }
-
-    public TypePokemon find(String name){
-        Optional<TypePokemon> obj = repo.findByEnglishName(name);
+    public TypePokemon find(String param) {
+        Optional<TypePokemon> obj;
+        try {
+            obj = repo.findById(Integer.parseInt(param));
+        } catch (Exception e){
+            obj = repo.findByEnglishName(param);
+        }
         return obj.orElseThrow(() -> new ObjectNotFoundException("Tipo de Pokemon não encontrada"));
     }
 
