@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TesteMovePokemon {
+public class MovePokemonTest {
     private static final Integer ID = 1;
     private static final Integer ACCURACY = 100;
     private static final Integer POWER = 80;
