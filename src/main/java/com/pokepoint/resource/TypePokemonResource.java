@@ -2,6 +2,7 @@ package com.pokepoint.resource;
 
 import com.pokepoint.domain.TypePokemon;
 import com.pokepoint.domain.dto.TypePokemonDTO;
+import com.pokepoint.exception.DataIntegrityException;
 import com.pokepoint.service.TypePokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,19 +46,15 @@ public class TypePokemonResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> insert(@Valid @RequestBody TypePokemon type){
+    public ResponseEntity<Object> insert(@Valid @RequestBody TypePokemon type) {
         TypePokemon obj = service.insert(type);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> delete(@PathVariable Integer id){
-        try{
-            this.service.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(id);
-        }
+    public ResponseEntity<Object> delete(@PathVariable Integer id) {
+        this.service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
