@@ -1,9 +1,12 @@
 package com.pokepoint.service;
 
 import com.pokepoint.domain.TypePokemon;
+import com.pokepoint.exception.DataIntegrityException;
 import com.pokepoint.exception.ObjectNotFoundException;
 import com.pokepoint.repository.TypePokemonRepository;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -22,28 +25,31 @@ public class TypePokemonService {
         Optional<TypePokemon> obj;
         try {
             obj = repo.findById(Integer.parseInt(param));
-        } catch (Exception e){
+        } catch (Exception e) {
             obj = repo.findByEnglishName(param);
         }
         return obj.orElseThrow(() -> new ObjectNotFoundException("Tipo de Pokemon não encontrada"));
     }
 
-    public List<TypePokemon> findAll(){
+    public List<TypePokemon> findAll() {
         return repo.findAll();
     }
 
-    public Page<TypePokemon> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+    public Page<TypePokemon> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
     }
 
-    public TypePokemon insert(TypePokemon type){
+    public TypePokemon insert(TypePokemon type) {
         type.setId(null);
         return repo.save(type);
     }
 
     public void delete(Integer id) {
-        System.out.println(id);
-        repo.deleteById(id);
+        try {
+            repo.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possivel deletar o tipo de Pokemon");
+        }
     }
 }
