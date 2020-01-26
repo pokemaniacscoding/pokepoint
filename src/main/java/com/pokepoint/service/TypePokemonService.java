@@ -43,6 +43,7 @@ public class TypePokemonService {
     }
 
     public void delete(Integer id) {
+        System.out.println(id);
         repo.deleteById(id);
     }
 }

@@ -53,7 +53,11 @@ public class TypePokemonResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete(@PathVariable Integer id){
-        this.service.delete(id);
-        return ResponseEntity.noContent().build();
+        try{
+            this.service.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(id);
+        }
     }
 }
