@@ -1,5 +1,7 @@
 package com.pokepoint.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +21,9 @@ public class TypePokemon implements Serializable {
     private String englishName;
     private String japaneseName;
     private String portugueseName;
+
+    @OneToMany(mappedBy = "type")
+    private List<MovePokemon> moves = new ArrayList<>();
 
     public TypePokemon() {
     }
@@ -62,20 +67,25 @@ public class TypePokemon implements Serializable {
         this.portugueseName = portugueseName;
     }
 
+    public List<MovePokemon> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(List<MovePokemon> moves) {
+        this.moves = moves;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TypePokemon typeName = (TypePokemon) o;
-        return id.equals(typeName.id) &&
-                englishName.equals(typeName.englishName) &&
-                japaneseName.equals(typeName.japaneseName) &&
-                portugueseName.equals(typeName.portugueseName);
+        TypePokemon that = (TypePokemon) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, englishName, japaneseName, portugueseName);
+        return Objects.hash(id);
     }
 
     @Override
