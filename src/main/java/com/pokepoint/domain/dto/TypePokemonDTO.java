@@ -1,10 +1,15 @@
 package com.pokepoint.domain.dto;
 
+import com.pokepoint.domain.MovePokemon;
 import com.pokepoint.domain.TypePokemon;
 
+import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TypePokemonDTO implements Serializable {
+public class TypePokemonDTO {
+
     private String englishName;
     private String japaneseName;
     private String portugueseName;
