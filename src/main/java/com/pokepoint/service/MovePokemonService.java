@@ -4,6 +4,7 @@ import com.pokepoint.domain.MovePokemon;
 import com.pokepoint.domain.TypePokemon;
 import com.pokepoint.domain.dto.MovePokemonDTO;
 import com.pokepoint.domain.dto.MovePokemonNewDTO;
+import com.pokepoint.exception.ObjectNotFoundException;
 import com.pokepoint.repository.MovePokemonRepository;
 import com.pokepoint.repository.TypePokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class MovePokemonService {
     }
 
     public MovePokemon find(Integer id){
-        Optional<MovePokemon> obj = this.repo.findById(id);
-        return obj.orElse(null);
+        Optional<MovePokemon> obj = repo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Move não encontrado"));
     }
 
     public Page<MovePokemon> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
