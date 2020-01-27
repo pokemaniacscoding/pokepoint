@@ -2,6 +2,7 @@ package com.pokepoint;
 
 import com.pokepoint.domain.MovePokemon;
 import com.pokepoint.domain.TypePokemon;
+import com.pokepoint.domain.dto.MovePokemonDTO;
 import com.pokepoint.repository.MovePokemonRepository;
 import com.pokepoint.repository.TypePokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,37 +28,25 @@ public class PokepointApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         TypePokemon normal = new TypePokemon(null, "Normal", "ノーマルタイプ", "Normal");
-        TypePokemon fighting = new TypePokemon(null, "Fighting", "かくとうタイプ", "lutador");
-        TypePokemon flying = new TypePokemon(null, "Flying", "ひこうタイプ", "Voador");
-        TypePokemon poison = new TypePokemon(null, "Poison", "どくタイプ", "Venenoso");
-        TypePokemon ground = new TypePokemon(null, "Ground", "じめんタイプ", "Terra");
-        TypePokemon rock = new TypePokemon(null, "Rock", "いわタイプ", "Pedra");
-        TypePokemon bug = new TypePokemon(null, "Bug", "むしタイプ", "Inseto");
-        TypePokemon ghost = new TypePokemon(null, "Ghost", "ゴーストタイプ", "Fantasma");
         TypePokemon steel = new TypePokemon(null, "Steel", "はがねタイプ", "Aço");
         TypePokemon fire = new TypePokemon(null, "Fire", "ほのおタイプ", "Fogo");
-        TypePokemon water = new TypePokemon(null, "Water", "みずタイプ", "Água");
-        TypePokemon grass = new TypePokemon(null, "Grass", "くさタイプ", "Grama");
-        TypePokemon electric = new TypePokemon(null, "Electric", "でんきタイプ", "Elétrico");
-        TypePokemon psychic = new TypePokemon(null, "Psychic", "エスパータイプ", "Psiquico");
-        TypePokemon ice = new TypePokemon(null, "Ice", "こおりタイプ", "Gelo");
         TypePokemon dragon = new TypePokemon(null, "Dragon", "ドラゴンタイプ", "Dragão");
-        TypePokemon dark = new TypePokemon(null, "Dark", "あくタイプ", "Trevas");
-        TypePokemon fairy = new TypePokemon(null, "Fairy", "フェアリータイプ", "Fada");
-        typePokemonRepository.saveAll(Arrays.asList(normal, fighting, flying, poison, ground, rock, bug, ghost, steel, fire, water, grass, electric, psychic, ice, dragon, dark, fairy));
+        TypePokemon ghost = new TypePokemon(null, "Ghost", "ゴーストタイプ", "Fantasma");
 
         MovePokemon dragonClaw = new MovePokemon(null, "Dragon Claw", "ドラゴンクロー", "Garra de Dragão", 100, 80, 15, 25, dragon);
         MovePokemon flamethrower = new MovePokemon(null, "Flamethrower", "かえんほうしゃ", "Lança Chamas", 100, 90, 15, 25, fire);
-        MovePokemon stoneEdge = new MovePokemon(null, "Stone Edge", "ストーンエッジ", "", 100, 80, 5, 8, ground);
-        MovePokemon megahorn = new MovePokemon(null, "Megahorn", "メガホーン", "", 85, 120, 10, 16,bug);
         MovePokemon shadowClaw = new MovePokemon(null, "Shadow Claw", "シャドークロー", "", 100, 70, 15, 24, ghost);
         MovePokemon ironTail = new MovePokemon(null, "Iron Tail", "アイアンテール", "", 75, 100, 15, 24, steel);
-        MovePokemon earthquake = new MovePokemon(null, "Earthquake", "じしん", "", 100, 100, 10, 16, rock);
-        MovePokemon toxic = new MovePokemon(null, "Toxic", "どくどく", "", 90, null, 10, 16, poison);
-        MovePokemon aerialAce = new MovePokemon(null, "Aerial Ace", "つばめがえし", "", null, 60, 20, 32, flying);
-        MovePokemon brickBreak = new MovePokemon(null, "Brick Break", "かわらわり", "", 100, 75, 15, 24, fighting);
         MovePokemon gigaImpact = new MovePokemon(null, "Giga Impact", "ギガインパクト", "", 90, 150, 5, 8, normal);
-        movePokemonRepository.saveAll(Arrays.asList(dragonClaw, flamethrower, stoneEdge, megahorn, shadowClaw, ironTail, earthquake, toxic, aerialAce, brickBreak, gigaImpact));
+
+        dragon.getMoves().addAll(Arrays.asList(dragonClaw));
+        fire.getMoves().addAll(Arrays.asList(flamethrower));
+        normal.getMoves().addAll(Arrays.asList(gigaImpact));
+        ghost.getMoves().addAll(Arrays.asList(shadowClaw));
+        steel.getMoves().addAll(Arrays.asList(ironTail));
+
+        typePokemonRepository.saveAll(Arrays.asList(normal, steel, fire, dragon, ghost));
+        movePokemonRepository.saveAll(Arrays.asList(dragonClaw, flamethrower, shadowClaw, ironTail, gigaImpact));
     }
 
 }

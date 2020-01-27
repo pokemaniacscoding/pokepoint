@@ -11,7 +11,7 @@ Atraves da API podemos obter os seguintes dados sobre os jogos e do anime Pokemo
 - Pokemons e seus dados
 - Personagens
 - Ginásios
-- Jogos
+- Games
 - Cidades
 
 ## Pré requisitos

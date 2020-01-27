@@ -2,7 +2,10 @@ package com.pokepoint.domain.dto;
 
 import com.pokepoint.domain.MovePokemon;
 
-public class MovePokemonDTO {
+import java.io.Serializable;
+
+public class MovePokemonDTO{
+
     private String englishName;
     private String japaneseName;
     private String portugueseName;

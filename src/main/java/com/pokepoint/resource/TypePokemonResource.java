@@ -1,13 +1,19 @@
 package com.pokepoint.resource;
 
 import com.pokepoint.domain.TypePokemon;
+import com.pokepoint.domain.dto.TypePokemonDTO;
+import com.pokepoint.exception.DataIntegrityException;
 import com.pokepoint.service.TypePokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/type")
@@ -17,13 +23,15 @@ public class TypePokemonResource {
     private TypePokemonService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<TypePokemon> findAll() {
-        return this.service.findAll();
+    public List<TypePokemonDTO> findAll() {
+        List<TypePokemon> lista = this.service.findAll();
+        List<TypePokemonDTO> listaDTO = lista.stream().map(obj -> new TypePokemonDTO(obj)).collect(Collectors.toList());
+        return listaDTO;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
-        TypePokemon typePokemon = this.service.find(id);
+    @RequestMapping(value = "/{param}", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable String param) {
+        TypePokemon typePokemon = this.service.find(param);
         return ResponseEntity.ok().body(typePokemon);
     }
 
@@ -35,5 +43,18 @@ public class TypePokemonResource {
             @RequestParam(value = "direction", defaultValue = "ASC") String direction
     ) {
         return this.service.findPage(page, linesPerPage, orderBy, direction);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Object> insert(@Valid @RequestBody TypePokemon type) {
+        TypePokemon obj = service.insert(type);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> delete(@PathVariable Integer id) {
+        this.service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

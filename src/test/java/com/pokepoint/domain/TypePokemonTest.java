@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TesteTypePokemon {
+public class TypePokemonTest {
     private static final Integer ID = 1;
     private static final String ENGLISH_NAME = "Dragon";
     private static final String JAPANESE_NAME = "ドラゴンタイプ";
