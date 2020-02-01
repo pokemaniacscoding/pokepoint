@@ -3,6 +3,7 @@ package com.pokepoint.validation;
 import com.pokepoint.domain.dto.MovePokemonNewDTO;
 import com.pokepoint.exception.FieldMessage;
 import com.pokepoint.repository.MovePokemonRepository;
+import com.pokepoint.repository.TypePokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
@@ -14,6 +15,8 @@ public class MoveInsertValidator implements ConstraintValidator<MoveInsert, Move
 
     @Autowired
     private MovePokemonRepository movePokemonRepository;
+    @Autowired
+    private TypePokemonRepository typePokemonRepository;
 
     @Override
     public void initialize(MoveInsert constraintAnnotation) {
@@ -24,26 +27,24 @@ public class MoveInsertValidator implements ConstraintValidator<MoveInsert, Move
     public boolean isValid(MovePokemonNewDTO obj, ConstraintValidatorContext context) {
         List<FieldMessage> list = new ArrayList<>();
 
-        if(obj.getEnglishName() == null || obj.getEnglishName().equals("")){
-            list.add(new FieldMessage("englishName","O nome Inglês do Movimento não foi informado"));
+        if(obj.getPpMin() == null || obj.getPpMin().equals("") || obj.getPpMin() <= 0){
+            list.add(new FieldMessage("ppMin","O numero minimo do PP do Movimento é invalido"));
         }
-        if(obj.getJapaneseName() == null || obj.getJapaneseName().equals("")){
-            list.add(new FieldMessage("japaneseName","O nome em Japones do Movimento não foi informado"));
+
+        if(obj.getPpMax() == null || obj.getPpMax().equals("") || obj.getPpMax() <= 0){
+            list.add(new FieldMessage("ppMax","O numero maximo do PP do Movimento é invalido"));
         }
-        if(obj.getPortugueseName() == null || obj.getPortugueseName().equals("")){
-            list.add(new FieldMessage("portugueseName","O nome em Português do Movimento não foi informado"));
+
+        if(obj.getAccuracy() == null || obj.getAccuracy().equals("") || obj.getAccuracy() <= 0){
+            list.add(new FieldMessage("accuracy","O numero do accuracy do Movimento é invalido"));
         }
-        if(obj.getPower() == null || obj.getPower().equals("")){
-            list.add(new FieldMessage("power","O power do Movimento não foi informado"));
+
+        if(obj.getPower() == null || obj.getPower().equals("") || obj.getPower() <= 0){
+            list.add(new FieldMessage("power","O numero do power do Movimento é invalido"));
         }
-        if(obj.getAccuracy() == null || obj.getAccuracy().equals("")){
-            list.add(new FieldMessage("Accuracy","O Accuracy do Movimento não foi informado"));
-        }
-        if(obj.getPpMax() == null || obj.getPpMax().equals("")){
-            list.add(new FieldMessage("ppMax","O maximo do PP do Movimento não foi informado"));
-        }
-        if(obj.getPpMin() == null || obj.getPpMin().equals("")){
-            list.add(new FieldMessage("ppMin","O minimo do PP do Movimento não foi informado"));
+
+        if(typePokemonRepository.findById(obj.getTypeId()) == null || typePokemonRepository.findById(obj.getTypeId()).isEmpty()){
+            list.add(new FieldMessage("typeId","O numero do Tipo informado do Movimento não foi encontrado"));
         }
 
         for (FieldMessage e : list) {
