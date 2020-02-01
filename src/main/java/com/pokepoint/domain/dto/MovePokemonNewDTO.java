@@ -4,6 +4,7 @@ import com.pokepoint.validation.MoveInsert;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @MoveInsert
@@ -11,12 +12,18 @@ public class MovePokemonNewDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Valid
+    @NotNull
     @NotEmpty(message = "Preenchimento obrigatório!!!")
     private String englishName;
+
+    @NotNull
     @NotEmpty(message = "Preenchimento obrigatório!!!")
     private String japaneseName;
+
+    @NotNull
     @NotEmpty(message = "Preenchimento obrigatório!!!")
     private String portugueseName;
+
     private Integer accuracy;
     private Integer power;
     private Integer ppMin;
