@@ -57,4 +57,9 @@ public class MovePokemonService {
         obj = repo.save(obj);
         return obj;
     }
+
+    public List<MovePokemon> findMoveByType(String nameMove) {
+        List<MovePokemon> list = this.repo.findByTypeEnglishName(nameMove);
+        return list;
+    }
 }
