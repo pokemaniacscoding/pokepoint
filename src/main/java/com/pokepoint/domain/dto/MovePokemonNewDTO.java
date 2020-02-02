@@ -33,6 +33,17 @@ public class MovePokemonNewDTO implements Serializable {
     public MovePokemonNewDTO() {
     }
 
+    public MovePokemonNewDTO(@Valid @NotNull @NotEmpty(message = "Preenchimento obrigatório!!!") String englishName, @NotNull @NotEmpty(message = "Preenchimento obrigatório!!!") String japaneseName, @NotNull @NotEmpty(message = "Preenchimento obrigatório!!!") String portugueseName, Integer accuracy, Integer power, Integer ppMin, Integer ppMax, Integer typeId) {
+        this.englishName = englishName;
+        this.japaneseName = japaneseName;
+        this.portugueseName = portugueseName;
+        this.accuracy = accuracy;
+        this.power = power;
+        this.ppMin = ppMin;
+        this.ppMax = ppMax;
+        this.typeId = typeId;
+    }
+
     public Integer getTypeId() {
         return typeId;
     }
