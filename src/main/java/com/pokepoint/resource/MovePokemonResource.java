@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,14 +24,14 @@ public class MovePokemonResource {
     private MovePokemonService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<MovePokemonDTO> findAll(){
+    public List<MovePokemonDTO> findAll() {
         List<MovePokemon> lista = this.service.findAll();
         List<MovePokemonDTO> listaDTO = lista.stream().map(obj -> new MovePokemonDTO(obj)).collect(Collectors.toList());
         return listaDTO;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id){
+    public ResponseEntity<?> find(@PathVariable Integer id) {
         MovePokemon obj = this.service.find(id);
         MovePokemonDTO objDTO = new MovePokemonDTO(obj);
         return ResponseEntity.ok().body(objDTO);
@@ -48,7 +49,21 @@ public class MovePokemonResource {
         return ResponseEntity.ok().body(listaDTO);
     }
 
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(value = "/type", method = RequestMethod.GET)
+    public ResponseEntity<List<MovePokemonDTO>> findMoveByType(@RequestParam(value = "name", defaultValue = "") String name) {
+        List<MovePokemon> list = new ArrayList<>();
+
+        if (name.equals("") || name == null) {
+            list = this.service.findAll();
+        } else {
+            list = this.service.findMoveByType(name);
+        }
+
+        List<MovePokemonDTO> listDTO = list.stream().map(obj -> new MovePokemonDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody MovePokemonNewDTO objDto) {
         MovePokemon obj = service.fromDTO(objDto);
         obj = service.insert(obj);
